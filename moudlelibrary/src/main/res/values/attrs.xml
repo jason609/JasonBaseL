@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--GramophoneView（唱片机）属性-->
+    <declare-styleable name="GramophoneView">
+        <!--图片半径-->
+        <attr name="picture_radius" format="dimension"/>
+        <!--图片资源id-->
+        <attr name="src" format="reference"/>
+        <!--唱片旋转速度-->
+        <attr name="disk_rotate_speed" format="float"/>
+    </declare-styleable>
+
+
+    <!--TickView（打钩小动画）的属性-->
+    <declare-styleable name="TickView">
+        <!--选中时圆的颜色-->
+        <attr name="checked_color" format="color"/>
+        <!--是否选中-->
+        <attr name="checked" format="boolean"/>
+        <!--圆半径-->
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="DashboardView">
+        <attr name="radiuss" format="dimension"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="sweepAngle" format="integer"/>
+        <attr name="bigSliceCount" format="integer"/>
+        <attr name="sliceCountInOneBigSlice" format="integer"/>
+        <attr name="arcColor" format="color"/>
+        <attr name="measureTextSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="headerTitle" format="string"/>
+        <attr name="headerTextSize" format="string"/>
+        <attr name="headerRadius" format="dimension"/>
+        <attr name="pointerRadius" format="dimension"/>
+        <attr name="circleRadius" format="dimension"/>
+        <attr name="minValue" format="integer"/>
+        <attr name="maxValue" format="integer"/>
+        <attr name="realTimeValue" format="float"/>
+        <attr name="stripeWidth" format="dimension"/>
+        <attr name="stripeMode" >
+            <enum name="normal" value="0"/>
+            <enum name="inner" value="1"/>
+            <enum name="outer" value="2"/>
+        </attr>
+        <attr name="bgColor" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="ScoreTrend">
+        <attr name="max_score" format="integer"/>
+        <attr name="min_score" format="integer"/>
+        <attr name="broken_line_color" format="color"/>
+    </declare-styleable>
+
+
+    <!--时间轴控件-->
+    <declare-styleable name="TimelineLayout">
+        <!--时间轴左偏移值-->
+        <attr name="line_margin_left" format="dimension"/>
+        <!--时间轴上偏移值-->
+        <attr name="line_margin_top" format="dimension"/>
+        <!--线宽-->
+        <attr name="line_stroke_width" format="dimension"/>
+        <!--线的颜色-->
+        <attr name="line_color" format="color"/>
+        <!--点的大小-->
+        <attr name="point_size" format="dimension"/>
+        <!--点的颜色-->
+        <attr name="point_color" format="color"/>
+        <!--图标-->
+        <attr name="icon_src" format="reference"/>
+    </declare-styleable>
+
+
+</resources>

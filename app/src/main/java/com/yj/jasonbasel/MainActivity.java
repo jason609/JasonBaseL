@@ -31,6 +31,23 @@ public class MainActivity extends BaseActivity {
     private SeekBar seekbar;
     private double position;
     private boolean isSeek;
+    private TabLayoutView ll_bottom;
+
+    private String[]titles=new String[]{
+      "首页",
+      "商城",
+      "发布",
+      "消息",
+      "我"
+    };
+
+    private int[]imgs=new int[]{
+      R.drawable.ic_launcher,
+      R.drawable.ic_launcher,
+      R.drawable.ic_launcher,
+      R.drawable.ic_launcher,
+      R.drawable.ic_launcher,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +55,17 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         surface=findViewById(R.id.surface);
         seekbar=findViewById(R.id.seekbar);
+        ll_bottom=findViewById(R.id.ll_bottom);
         initPlayer();
+        Toaster.init(this);
 
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toaster.cancel();
     }
 
     @Override
@@ -56,6 +82,9 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
+
+
+
 
     }
 
@@ -103,6 +132,24 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+        ll_bottom.setDataSource(titles, imgs, 0);
+        ll_bottom.setImageStyle(25, 25);
+        ll_bottom.setTextStyle(12, R.color.colorAccent,R.color.colorPrimary);
+        ll_bottom.initDatas();
+        ll_bottom.setOnItemOnclickListener(new TabLayoutView.OnItemOnclickListener() {
+            @Override
+            public void onItemClick(int index) {
+            }
+        });
+
+        ll_bottom.setDotsCount(0,258);
+        ll_bottom.setDotsCount(1,0);
+        ll_bottom.setDotsCount(2,5);
+        ll_bottom.setDotsCount(3,0);
+        ll_bottom.setDotsCount(4,119);
+
+
     }
 
     public void start(View view) {
@@ -111,8 +158,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void pause(View view) {
-        wlMedia.pause();
+       //  wlMedia.pause();
       //  showPwdDialog();
+        Toaster.show("点击暂停");
     }
 
 

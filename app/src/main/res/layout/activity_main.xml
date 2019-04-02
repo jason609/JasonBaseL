@@ -6,9 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.yj.jasonbasel.TabLayoutView
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:background="@color/white"
+        android:layout_height="60dp">
+
+    </com.yj.jasonbasel.TabLayoutView>
+
     <com.ywl5320.wlmedia.widget.WlSurfaceView
         android:id="@+id/surface"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent" />
 
     <SeekBar

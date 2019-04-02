@@ -23,5 +23,6 @@
     <color name="recycler_swipe_color_loading_color3">#FF777777</color>
 
     <color name="mai_color_bg">#303F9F</color>
+    <color name="color_ffffff">#ffffff</color>
 
 </resources>

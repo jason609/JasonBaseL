@@ -160,7 +160,6 @@ public class TabLayoutView extends LinearLayout {
             prl.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Toast.makeText(context, titles[index], Toast.LENGTH_SHORT).show();
                     setSelectStyle(index);
                     if(onItemOnclickListener != null)
                     {

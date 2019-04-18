@@ -32,6 +32,9 @@
         <attr name="widthProportion" format="integer"></attr>
         <attr name="heightProportion" format="integer"></attr>
         <attr name="bottomColor" format="color"></attr>
+        <attr name="textGravity" format="integer"></attr>
+        <attr name="textSize" format="dimension"></attr>
+        <attr name="bottomHeight" format="dimension"></attr>
     </declare-styleable>
 
 

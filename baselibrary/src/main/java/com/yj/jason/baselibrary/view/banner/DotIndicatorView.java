@@ -39,14 +39,13 @@ public class DotIndicatorView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(mDrawable!=null){
-            /*mDrawable.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
-            mDrawable.draw(canvas);*/
            Bitmap bitmap= drawableToBitmap(mDrawable);
-
+           if(mDrawable instanceof BitmapDrawable){
+               canvas.drawBitmap(bitmap,0,0,null);
+               return;
+           }
            Bitmap circleBitmap=getCircleBitmap(bitmap);
-
            canvas.drawBitmap(circleBitmap,0,0,null);
-            
         }
     }
 

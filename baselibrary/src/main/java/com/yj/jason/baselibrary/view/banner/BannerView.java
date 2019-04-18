@@ -43,6 +43,11 @@ public class BannerView extends RelativeLayout {
     private int mWidthProportion=1;
     private int mHeightProportion=1;
 
+    private int mTextSize=12;
+    private int mBottomHeiht=25;
+
+    private int mTextGravity=Gravity.LEFT;
+
     private int mBottonBG=Color.TRANSPARENT;
 
     public BannerView(Context context) {
@@ -75,6 +80,7 @@ public class BannerView extends RelativeLayout {
 
         // 获取点的位置
         mDotGravity = array.getInt(R.styleable.BannerView_dotGravity, 2);
+        mTextGravity = array.getInt(R.styleable.BannerView_textGravity, 0);
 
         switch (mDotGravity){
             case 0:
@@ -85,6 +91,18 @@ public class BannerView extends RelativeLayout {
                 break;
             case 2:
                 mDotGravity=Gravity.RIGHT;
+                break;
+        }
+
+        switch (mTextGravity){
+            case 0:
+                mTextGravity=Gravity.LEFT;
+                break;
+            case 1:
+                mTextGravity=Gravity.CENTER;
+                break;
+            case 2:
+                mTextGravity=Gravity.RIGHT;
                 break;
         }
 
@@ -103,6 +121,10 @@ public class BannerView extends RelativeLayout {
         mDotSize = (int) array.getDimension(R.styleable.BannerView_dotSize,dip2px(mDotSize));
         mDotDistance = (int) array.getDimension(R.styleable.BannerView_dotDistance,dip2px(mDotDistance));
 
+        mTextSize = (int) array.getDimension(R.styleable.BannerView_textSize,dip2px(mTextSize));
+        mBottomHeiht = (int) array.getDimension(R.styleable.BannerView_bottomHeight,dip2px(mBottomHeiht));
+
+
         mWidthProportion = array.getInt(R.styleable.BannerView_widthProportion, mWidthProportion);
         mHeightProportion = array.getInt(R.styleable.BannerView_heightProportion, mHeightProportion);
 
@@ -120,10 +142,22 @@ public class BannerView extends RelativeLayout {
 
 
         mRlBottom.setBackgroundColor(mBottonBG);
+
+        RelativeLayout.LayoutParams params=(RelativeLayout.LayoutParams)mRlBottom.getLayoutParams();
+
+        params.height=dip2px(mBottomHeiht);
+
+        mRlBottom.setLayoutParams(params);
+
+        mTvBanner.setGravity(mTextGravity);
+
+        mTvBanner.setTextSize(px2sp(mContext,mTextSize));
     }
 
-
-
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
 
 
 
@@ -150,32 +184,36 @@ public class BannerView extends RelativeLayout {
         mTvBanner.setText(firstDest);
 
 
+
+        Log.i("tag","mWidthProportion==="+mWidthProportion+"mHeightProportion==="+mHeightProportion);
+
         // 8.自适应高度 动态指定高度
         if(mHeightProportion == 0 || mWidthProportion == 0){
             return;
         }
 
-
-        // 动态指定宽高  计算高度
-       /* int width = getMeasuredWidth();
-        // 计算高度
-        int height = (int) (width*mHeightProportion/mWidthProportion);
-        // 指定宽高
-        getLayoutParams().height = height;*/
-
-       /* this.post(new Runnable() {
+        this.post(new Runnable() {
             @Override
             public void run() {
                 // 动态指定宽高  计算高度
                 int width = getMeasuredWidth();
+
+
                 // 计算高度
                 int height = (int) (width*mHeightProportion/mWidthProportion);
+
+                Log.i("tag","width==="+width);
+                Log.i("tag","height==="+height);
+
+                ViewGroup.LayoutParams params = getLayoutParams();
+
                 // 指定宽高
-                getLayoutParams().height = height;
+                params.height = height;
+
+                setLayoutParams(params);
+
             }
         });
-*/
-
 
 
     }
@@ -204,6 +242,8 @@ public class BannerView extends RelativeLayout {
         mTvBanner.setText(desc);
 
 
+
+
     }
 
     //初始化点的指示器
@@ -213,6 +253,7 @@ public class BannerView extends RelativeLayout {
 
         //让点的位置在右边
         mLLDotContainer.setGravity(mDotGravity);
+
 
         for(int i=0;i<count;i++){
             //不断往指示器添加数据
@@ -242,6 +283,7 @@ public class BannerView extends RelativeLayout {
     private int dip2px(int dip) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dip,mContext.getResources().getDisplayMetrics());
     }
+
 
 
     //自动轮播

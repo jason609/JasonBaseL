@@ -177,7 +177,7 @@ public class OkHttpEngine implements IHttpEngine {
 
         if(params!=null&&!params.isEmpty()){
             for(String key:params.keySet()){
-                builder.addFormDataPart(key,params.get(key)+"");
+               // builder.addFormDataPart(key,params.get(key)+"");
                 Object value=params.get(key);
 
                 if(value instanceof File){

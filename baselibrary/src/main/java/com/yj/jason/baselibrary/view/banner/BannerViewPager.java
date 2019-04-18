@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yj.jason.baselibrary.utils.Toaster;
+
 import java.io.File;
 import java.lang.reflect.Field;
 
@@ -32,6 +34,8 @@ public class BannerViewPager extends ViewPager{
 
     //默认延迟 页面切换间隔时间
     private int mDelayTime=3500;
+
+    private int currentPos;
 
     private Handler mHandler=new Handler(){
         @Override
@@ -81,6 +85,9 @@ public class BannerViewPager extends ViewPager{
         setAdapter(new BannerPagerAdapter());
     }
 
+    public void setPostiong(int pos){
+        currentPos=pos;
+    }
 
     //自动轮播
     public void startRoll(){
@@ -114,6 +121,8 @@ public class BannerViewPager extends ViewPager{
 
     }
 
+    private int lastPos;
+
     private class BannerPagerAdapter extends PagerAdapter{
 
         @Override
@@ -133,11 +142,9 @@ public class BannerViewPager extends ViewPager{
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            //position 的变化 0到2的31次方
-
 
             //采用adapter 设计模式 为了完全让用户自定义
-            View view=mBannerAdapter.getView(position%mBannerAdapter.getCount());
+            View view=mBannerAdapter.getView(currentPos);
 
             container.addView(view);
 

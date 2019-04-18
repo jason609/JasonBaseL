@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yj.jason.baselibrary.R;
+import com.yj.jason.baselibrary.utils.Toaster;
 
 
 //自定义轮播图
@@ -125,7 +127,7 @@ public class BannerView extends RelativeLayout {
 
 
 
-    public void setAdapter(BannerAdapter adapter) {
+    public void setAdapter(final BannerAdapter adapter) {
 
         this.mAdapter=adapter;
         mBannervp.setAdapter(mAdapter);
@@ -135,8 +137,10 @@ public class BannerView extends RelativeLayout {
         mBannervp.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
+
                //监听当前选中位置
                 pageSelected(position);
+
             }
         });
 
@@ -183,7 +187,11 @@ public class BannerView extends RelativeLayout {
         DotIndicatorView oldDotIndicatorView=(DotIndicatorView) mLLDotContainer.getChildAt(mCurrentPostion);
         oldDotIndicatorView.setDrawable(mNormalDrawable);
 
+
         mCurrentPostion=position%mAdapter.getCount();
+
+        mBannervp.setPostiong(mCurrentPostion);
+
 
         DotIndicatorView nowDotIndicatorView=(DotIndicatorView) mLLDotContainer.getChildAt(mCurrentPostion);
         nowDotIndicatorView.setDrawable(mFocusDrawable);

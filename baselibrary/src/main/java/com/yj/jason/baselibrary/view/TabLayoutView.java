@@ -2,6 +2,7 @@ package com.yj.jason.baselibrary.view;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -26,6 +27,8 @@ public class TabLayoutView extends LinearLayout {
     private Context context;
     private String[] titles; //要显示的标题
     private int[] imgs; //图标
+    private Drawable[] drawableImgs; //drawable图标
+    private Drawable[] drawableSelectImgs; //drawable选中图标
     private int imgwidth;
     private int imgheight;
     private int txtsize; //标题大小
@@ -66,6 +69,14 @@ public class TabLayoutView extends LinearLayout {
     {
         this.titles = tabtxts;
         this.imgs = imgs;
+        this.currentIndex = currentIndex;
+    }
+
+    public void setDataSource(String[] tabtxts, Drawable[] imgs,Drawable[]imgSel, int currentIndex)
+    {
+        this.titles = tabtxts;
+        this.drawableImgs = imgs;
+        this.drawableSelectImgs=imgSel;
         this.currentIndex = currentIndex;
     }
 
@@ -125,7 +136,12 @@ public class TabLayoutView extends LinearLayout {
         {
             ImageView imageView = new ImageView(context);
             imageView.setLayoutParams(imglp);
-            imageView.setImageResource(imgs[i]);
+            if(imgs==null){
+                imageView.setImageDrawable(drawableImgs[i]);
+            }else {
+                imageView.setImageResource(imgs[i]);
+            }
+
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             TextView textView = new TextView(context);
@@ -188,12 +204,20 @@ public class TabLayoutView extends LinearLayout {
             if(i == index)
             {
                 textViews.get(i).setTextColor(context.getResources().getColor(txtSelectedColor));
-                imageViews.get(i).setSelected(true);
+                if(drawableSelectImgs!=null){
+                    imageViews.get(i).setImageDrawable(drawableSelectImgs[i]);
+                }else {
+                    imageViews.get(i).setSelected(true);
+                }
             }
             else
             {
                 textViews.get(i).setTextColor(context.getResources().getColor(txtColor));
-                imageViews.get(i).setSelected(false);
+                if(drawableSelectImgs!=null){
+                    imageViews.get(i).setImageDrawable(drawableImgs[i]);
+                }else {
+                    imageViews.get(i).setSelected(false);
+                }
             }
         }
     }

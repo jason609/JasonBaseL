@@ -8,8 +8,6 @@ import android.util.Log;
 import com.yj.jason.baselibrary.http.EngineCallBack;
 import com.yj.jason.baselibrary.http.HttpUtils;
 import com.yj.jason.baselibrary.http.IHttpEngine;
-import com.yj.jason.moudlelibrary.db.DaoSupportFactory;
-import com.yj.jason.moudlelibrary.db.IDaoSupport;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +26,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 //okhttp 引擎
-public class OkHttpEngine implements IHttpEngine {
+public class OkHttpFileEngine implements IHttpEngine {
 
     private OkHttpClient mOkhttpClient=new OkHttpClient();
 
@@ -115,7 +113,7 @@ public class OkHttpEngine implements IHttpEngine {
         }
 
 
-        RequestBody requestBody=appendEncodedBody(params);
+        RequestBody requestBody=appendBody(params);
 
         Request request=new Request.Builder()
                         .url(url)
@@ -181,14 +179,13 @@ public class OkHttpEngine implements IHttpEngine {
     private RequestBody appendEncodedBody(Map<String, Object> params) {
         String paramsStr="";
         StringBuilder builder=new StringBuilder();
-        if(params.size()>0) {
-            for (String key : params.keySet()) {
-                builder.append(key + "=" + params.get(key) + "&");
-            }
-            paramsStr = builder.substring(0, builder.length() - 1);
-
+        for(String key:params.keySet()){
+            builder.append(key+"="+params.get(key)+"&");
         }
-        return RequestBody.create(MEDIA_TYPE_NORAML_FORM, paramsStr);
+        paramsStr=builder.substring(0,builder.length()-1);
+        Log.i("tag","paramsStr=="+paramsStr);
+        RequestBody requestBody=RequestBody.create(MEDIA_TYPE_NORAML_FORM,paramsStr);
+        return requestBody;
     }
 
 
